@@ -2,20 +2,24 @@
 #include <iostream>
 using namespace std;
 
+//структура звена списка
 template <class T>
 struct _Node
 {
 	T data;
 	_Node<T> *next;
 
-	_Node<T>(T i, _Node *ptr1) { data = i; next = ptr1;}
+	_Node<T>(T i, _Node *ptr1) { data = i; next = ptr1; }
 	//Конструктор для создания нового элемента
 };
 
+
+//класс список
 template <class T>
 class _List
 {
-private:
+protected:
+
 	int size; //счетчик числа элементов
 	_Node<T> *head; 
 	_Node<T> *tail;
@@ -36,7 +40,7 @@ public:
 	void add_el_in_tail(T data);
 	void add_node(_Node<T>* ptr, T data);
 
-	void del_el_fr_head();
+	T del_el_fr_head();
 	void del_el_fr_tail();
 	void del_node(_Node<T>* ptr);
 
@@ -45,9 +49,9 @@ public:
 
 };
 
-
 /////////////////////////////////////////////////////////////////////////////
-template<class T> inline _List<T>::~_List()
+//реализация функций для списка
+template <class T> _List<T>::~_List()
 {
 	while (head)
 	{
@@ -123,14 +127,16 @@ template <class T> void _List<T>::add_node(_Node<T>* ptr, T data)
 	}
 }
 
-template <class T> void _List<T>::del_el_fr_head()
+template <class T> T _List<T>::del_el_fr_head()
 {
 	if (size)
 	{
 		_Node<T>* temp = head->next;
+		T res = head->data;
 		delete head;
 		head = temp;
 		size--;
+		return res;
 	}
 	else
 		throw 1;
@@ -211,3 +217,40 @@ template <class T> _Node<T>* _List<T> :: find_ptr(T elem)
 		return temp;
 	 }
 }
+////////////////////////////////////////////////////////////////////////////////
+//класс стек
+template <class T>
+class _Stack : public _List<T>
+{
+public:
+	_Stack();
+	bool is_stack_empty();
+	void push(const T elem);
+	T pop();
+	T view_top();
+
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+//реализация функций для стека
+template <class T> _Stack<T>::_Stack() {}
+
+template <class T> void _Stack<T>::push(const T elem)
+{
+	add_el_in_head(elem);
+};
+
+template <class T> T _Stack<T>::pop()
+{
+	del_el_fr_head();
+};
+
+template <class T> bool _Stack<T>::is_stack_empty()
+{
+	is_list_empty();
+};
+
+template <class T> T _Stack<T>::view_top()
+{
+	viewData(head);
+};
