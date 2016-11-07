@@ -34,7 +34,7 @@ public:
 	int GetSize() { return size; }
 	void Print_list();
 
-	bool is_list_empty(_Node<T>* head);
+	bool is_list_empty();
 
 	void add_el_in_head(T data);
 	void add_el_in_tail(T data);
@@ -72,7 +72,7 @@ do
 
 }
 
-template <class T> bool _List<T>::is_list_empty(_Node<T>* head)
+template <class T> bool _List<T>::is_list_empty()
 {
 	if (size == 0)
 	{
@@ -228,7 +228,6 @@ public:
 	void push(const T elem);
 	T pop();
 	T view_top();
-
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -242,15 +241,15 @@ template <class T> void _Stack<T>::push(const T elem)
 
 template <class T> T _Stack<T>::pop()
 {
-	del_el_fr_head();
+	return del_el_fr_head();
 };
 
 template <class T> bool _Stack<T>::is_stack_empty()
 {
-	is_list_empty();
+	return is_list_empty();
 };
 
 template <class T> T _Stack<T>::view_top()
 {
-	viewData(head);
+	return viewData(head);
 };
