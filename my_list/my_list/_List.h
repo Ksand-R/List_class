@@ -220,8 +220,9 @@ template <class T> _Node<T>* _List<T> :: find_ptr(T elem)
 ////////////////////////////////////////////////////////////////////////////////
 //класс стек
 template <class T>
-class _Stack : public _List<T>
+class _Stack 
 {
+	_List<T> memory;
 public:
 	_Stack();
 	bool is_stack_empty();
@@ -236,20 +237,22 @@ template <class T> _Stack<T>::_Stack() {}
 
 template <class T> void _Stack<T>::push(const T elem)
 {
-	add_el_in_head(elem);
+	memory.add_el_in_head(elem);
 };
 
 template <class T> T _Stack<T>::pop()
 {
-	return del_el_fr_head();
+	return memory.del_el_fr_head();
 };
 
 template <class T> bool _Stack<T>::is_stack_empty()
 {
-	return is_list_empty();
+	return memory.is_list_empty();
 };
 
 template <class T> T _Stack<T>::view_top()
 {
-	return viewData(head);
+	T top = memory.del_el_fr_head();
+	memory.add_el_in_head(top);
+	return top;
 };

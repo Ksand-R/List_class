@@ -37,11 +37,14 @@ TEST(Tlist, can_find_ptr)
 
 }
 
-TEST(Tlist, cant_find_ptr)
+TEST(Tlist, find_is_correct)
 {
 	_List<char> l;
 	l.add_el_in_tail('a');
-	ASSERT_ANY_THROW(l.find_ptr('b'));
+	l.add_el_in_tail('b');
+
+	_Node<char>* n = l.find_ptr('b');
+	EXPECT_EQ('b', n->data);
 
 }
 
