@@ -64,11 +64,11 @@ template <class T> _List<T>::~_List()
 template <class T> void _List<T>::Print_list()
 {
 	_Node<T>* temp = head;
-do
-{
-	cout << temp->data << endl;
-	temp = temp->next;
-} while (temp);
+	while (temp)
+	{
+		cout << temp->data << endl;
+		temp = temp->next;
+	} ;
 
 }
 
@@ -139,8 +139,7 @@ template <class T> T _List<T>::del_el_fr_head()
 		return res;
 	}
 	else
-		throw 1;
-
+		throw string("Error");
 }
 
 template <class T> void _List<T>::del_el_fr_tail()
@@ -171,7 +170,7 @@ template <class T> void _List<T>::del_node(_Node<T>* ptr)
 {
 	if (size == 0)
 	{
-		throw 1;
+		throw string("Error");
 	}
 	else 
 		if (size == 1)
@@ -193,8 +192,7 @@ template <class T> _Node<T>* _List<T> :: find_ptr(T elem)
 {
 	if (size == 0)
 	{
-		//cout << "Error" << endl;
-		throw 1;
+		throw string("Error");
 	}
 		else
 	{
@@ -212,7 +210,7 @@ template <class T> _Node<T>* _List<T> :: find_ptr(T elem)
 		}
 		if (temp == NULL)
 		{
-			throw 1;
+			throw string("Error");
 		}
 		return temp;
 	 }
